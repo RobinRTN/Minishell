@@ -3,26 +3,26 @@ Our very own minishell - replica of bash
 
 ## Overview
 
-The Minishell project at [42 School](https://www.42.fr/) is an intricate and rewarding challenge. Completed shortly after training at Le Wagon, this project required thorough collaboration and a deep understanding of shell programming. While our project isn't perfect, it encapsulates the significant growth in our skills and is a substantial part of our learning journey.
+The Minishell project at [42 School](https://www.42.fr/) is an intricate and rewarding challenge. While our project isn't perfect, it encapsulates the significant growth in our skills and is a substantial part of our learning journey.
 
 ## Global Approach
 
 We chose to focus on the mandatory features, setting aside the bonus parts for a dedicated effort on quality. Our strategy was built around:
 - Utilizing chained lists for efficient memory management.
-- Adhering strictly to `norminette` standards for maintainable code.
+- Adhering strictly to `norminette` standards as it went for maintainable code.
 - Dividing the project into two primary sections: parsing and execution, to optimize teamwork.
 
 ## Parsing Breakdown
 
 ### 1. Initialization and Error Handling
 - Setting up the core data structures.
-- Extracting `PATH` from the environment.
+- Extracting `PATH` from the environment and storing key value pairs into a dedicated chained list.
 - Handling user input through `readline`.
 - Implementing initial checks for empty lines or unclosed quotes.
 
 ### 2. Expansion
 - Processing elements with `$` based on their context (quotes, heredocs, variable names).
-- Expanding elements correctly according to their specific conditions.
+- Expanding elements correctly in the string according to their specific conditions.
 
 ### 3. Command Separation
 - Splitting input at `|` to indicate separate commands, while respecting quotes.
@@ -37,6 +37,7 @@ We chose to focus on the mandatory features, setting aside the bonus parts for a
 
 ### 6. Command Processing
 - Breaking down the command string by spaces.
+- Removing the outside quotes by pairs
 - Appending `PATH` to commands.
 - Repeating this process for all commands.
 
