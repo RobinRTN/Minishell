@@ -41,41 +41,39 @@ We chose to focus on the mandatory features, setting aside the bonus parts for a
 - Repeating this process for all commands.
 
 ## Expected Outcome
+After the parsing stage, the commands should be well-structured and ready for execution. You can check the minishell.h file to check how the lists are made and connected
+  
+## Execution Breakdown
 
-After the parsing stage, the commands should be well-structured and ready for execution. Here's an example structure:
 
-typedef enum s_type
-{
-	REDIR_INPUT = 10,
-	REDIR_OUTPUT = 20,
-	HERE_DOC = 100,
-	RED_END_OUPUT = 200
-}						t_type;
+## Builtins Breakdown
 
-typedef struct s_redir
-{
-	int					index;
-	t_type				type;
-	char				*file_name;
-	char				content[3];
-	char				*stopper;
-	struct s_heredoc	*heredoc;
-	struct s_redir		*prev;
-	struct s_redir		*next;
-}						t_redir;
+### 1. `exit`
+- **Single Argument Check**: Errors out if more than one argument is provided.
+- **Range Checking**: Validates if the exit status is within the `int` range. Prints an error for invalid ranges.
+- **Exit Behavior**: Exits the program with the specified status (up to 255). Higher values overflow, and negatives are considered positive.
 
-typedef struct s_cmd
-{
-	char				*cmd_str;
-	char				clean_cmd[4096];
-	char				**clean_split;
-	int					nbr_redir;
-	char				*cmd_path;
-	struct s_cmd		*prev;
-	struct s_cmd		*next;
-	t_redir				*redir;
+### 2. `cd`
+- **Special Cases**: Supports `cd -`, `cd --`, and `cd ~`.
+- **Argument Validation**: Errors out if multiple arguments are passed.
 
-}						t_cmd;
+### 3. `export`
+- **Environment Variables**: Lists all environment variables from the initial chained list.
+- **Argument Formatting**: Ensures arguments start with `_` and handles numerical values. Checks for `=` presence.
+- **Output Format**: Quotes variables with `=` in expansion but not in the `env` command display.
+
+### 4. `env`
+- **Display Environment**: Shows all environment variables, reflecting current session changes.
+
+### 5. `unset`
+- **Variable Removal**: Deletes specified variables from the environment.
+- **Argument Handling**: Manages multiple arguments and addresses error scenarios.
+
+### 6. `echo`
+- **Flag Processing**: Handles `-n` and consecutive `-n` flags effectively.
+
+### 7. `pwd`
+- **Functionality**: Implements the print working directory command straightforwardly.
 
 
 This project, while not flawless, is a testament to our perseverance and commitment to learning. We welcome any feedback, contributions, or insights, as we believe in the power of collaborative growth and continuous improvement.
