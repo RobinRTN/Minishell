@@ -36,8 +36,8 @@ We chose to focus on the mandatory features, setting aside the bonus parts for a
 - Ensuring commands are executable and reporting errors as needed.
 
 ### 6. Command Processing
-- Breaking down the command string by spaces.
-- Removing the outside quotes by pairs
+- Breaking down the command string by spaces. You must create a Split function taking quotes into account (jump to closing quotes).
+- Removing the outside quotes by pairs to avoid execution errors.
 - Appending `PATH` to commands.
 - Repeating this process for all commands.
 
